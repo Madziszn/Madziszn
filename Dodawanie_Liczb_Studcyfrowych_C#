@@ -1,0 +1,132 @@
+//program zajmujacy sie dodawaniem liczb stucyfrowych
+using System;
+using System.Collections.Generic;
+
+namespace ConsoleApp5
+{
+    class Program
+
+    {
+        public static string Reverse(string s)
+        {
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Podaj z jakich cyfr ma się składać Twoja pierwsza liczba 100-cyfrowa");
+            int a = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(""); //przerwa
+            Console.WriteLine("Podaj z jakich cyfr ma się składać Twoja druga liczba 100-cyfrowa");
+            int b = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(""); //przerwa
+            char c = Convert.ToChar(a+48);
+            char d = Convert.ToChar(b+48);
+            var lista1 = new List<char>();
+            var lista2 = new List<char>();
+            for (int i = 0; i <= 99; i++)
+            {
+                //pierwsza liczba
+                lista1.Add(c);
+                //druga liczba
+                lista2.Add(d);
+            }
+            var myArray = lista1.ToArray();
+            var myArray2 = lista2.ToArray();
+            Console.WriteLine("Twoja  pierwsza liczba to");
+            Console.WriteLine(myArray);
+            Console.WriteLine(""); //przerwa
+            Console.WriteLine("Twoja  druga liczba to");
+            Console.WriteLine(myArray2);
+            Console.WriteLine(""); //przerwa
+            
+            
+            //tworzenie listy
+            var myList3 = new List<char>();
+            int tymczasowa = 0;
+
+            //petla dodajaca liczby
+            for (int i = 99; i > 0; i--)
+            {
+                int ile = i;
+                int liczbaliczona1 = Convert.ToInt32(myArray[ile] - 48);
+                int liczbaliczona2 = Convert.ToInt32(myArray2[ile] - 48);
+
+                int liczbawyliczona = liczbaliczona1 + liczbaliczona2 + tymczasowa;
+                tymczasowa = 0;
+                if (liczbawyliczona < 10)
+                {
+                    char przekonwertowanaLiczba = Convert.ToChar(liczbawyliczona + 48);
+                    myList3.Add(przekonwertowanaLiczba);
+                }
+                else
+                {
+                    tymczasowa = 1;
+                    liczbawyliczona = liczbawyliczona - 10;
+                    char przekonwertowanaLiczba = Convert.ToChar(liczbawyliczona + 48);
+                    myList3.Add(przekonwertowanaLiczba);
+                    if (i == 1)
+                    {
+                        int liczbaliczona3 = Convert.ToInt32(myArray[0] - 48);
+                        int liczbaliczona4 = Convert.ToInt32(myArray2[0] - 48);
+                        if (liczbaliczona3 + liczbaliczona4 + tymczasowa < 10)
+                        {
+                            int wynik2 = liczbaliczona3 + liczbaliczona4 + tymczasowa;
+                            char czarujacy = Convert.ToChar(wynik2 + 48);
+                            myList3.Add(czarujacy);
+                        }
+                        if (liczbaliczona3 + liczbaliczona4 + tymczasowa >= 10)
+                        {
+                            int wynik = liczbaliczona3 + liczbaliczona4 + tymczasowa - 10;
+                            char czarujacy1 = Convert.ToChar(wynik + 48);
+                            myList3.Add(czarujacy1);
+                            myList3.Add('1');
+                        }
+
+
+                    }
+                }
+            }
+
+            var myArray3 = myList3.ToArray();
+            string str = new string(myArray3);
+            Console.WriteLine("Dodawanie:" + " " + Reverse(str));
+            var myList7 = new List<char>();
+            if (myArray[0] > myArray2[0])
+            {
+                for (int i = 99; i > 0; i--)
+                {
+                    int ile = i;
+                    int liczbaliczona1 = Convert.ToInt32(myArray[ile] - 48);
+                    int liczbaliczona2 = Convert.ToInt32(myArray2[ile] - 48);
+                    int wynik = liczbaliczona1 - liczbaliczona2;
+                    char przekonwertowanaLiczba = Convert.ToChar(wynik + 48);
+                    myList7.Add(przekonwertowanaLiczba);
+                }
+            }
+            if (myArray[0] < myArray2[0])
+            {
+                for (int i = 99; i > 0; i--)
+                {
+                    int ile = i;
+                    int liczbaliczona1 = Convert.ToInt32(myArray[ile] - 48);
+                    int liczbaliczona2 = Convert.ToInt32(myArray2[ile] - 48);
+                    int wynik = liczbaliczona2 - liczbaliczona1;
+                    char przekonwertowanaLiczba = Convert.ToChar(wynik + 48);
+                    myList7.Add(przekonwertowanaLiczba);
+                }
+            }
+            var myArray7 = myList7.ToArray();
+            string str2 = new string(myArray7);
+            if (myArray[0] < myArray2[0])
+            {
+                Console.WriteLine("Odejmowanie:" + " " + "-" + Reverse(str2));
+            }
+            if (myArray[0] > myArray2[0])
+            {
+                Console.WriteLine("Odejmowanie:" + " " + Reverse(str2));
+            }
+        }
+    }
+}
